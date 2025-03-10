@@ -1,105 +1,83 @@
 package com.akumasoft.users.entity;
+import com.akumasoft.users.request.*;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
-	private long id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "userID")
+	private Long UserID;
 	
-	private long profileid;
+	@Column(name = "tag")
+	@NotNull
+	private String Tag;
 	
-	private long siteID;
+	@Column(name = "siteID")
+	@NotNull
+	private Long siteID;
 	
-	private long passID;
+	@Column(name = "passID", nullable = true)
+	private Long passID;
 	
+	@Column(name = "ubicationID")
+	private Long ubicationID;
+	
+	@Column(name = "name", nullable = true)
 	private String Name;
 	
+	@Column(name = "lastName", nullable = true)
 	private String LastName;
 	
+	@Column(name = "secondName", nullable = true)
 	private String SecondName;
 	
+	@Column(name = "secondLastName", nullable = true)
 	private String SecondLastName;
-	
+		
+	@Column(name = "email")
 	private String Email;
 	
-	private String CreatedDate;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public long getProfileid() {
-		return profileid;
-	}
-
-	public void setProfileid(long profileid) {
-		this.profileid = profileid;
-	}
-
-	public long getSiteID() {
-		return siteID;
-	}
-
-	public void setSiteID(long siteID) {
-		this.siteID = siteID;
-	}
-
-	public long getPassID() {
-		return passID;
-	}
-
-	public void setPassID(long passID) {
-		this.passID = passID;
-	}
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
-	public String getLastName() {
-		return LastName;
-	}
-
-	public void setLastName(String lastName) {
-		LastName = lastName;
-	}
-
-	public String getSecondName() {
-		return SecondName;
-	}
-
-	public void setSecondName(String secondName) {
-		SecondName = secondName;
-	}
-
-	public String getSecondLastName() {
-		return SecondLastName;
-	}
-
-	public void setSecondLastName(String secondLastName) {
-		SecondLastName = secondLastName;
-	}
-
-	public String getEmail() {
-		return Email;
-	}
-
-	public void setEmail(String email) {
-		Email = email;
-	}
-
-	public String getCreatedDate() {
-		return CreatedDate;
-	}
-
-	public void setCreatedDate(String createdDate) {
-		CreatedDate = createdDate;
+	@Column(name = "createdDate", nullable = true)
+	private String createdDate;
+	
+	@Column(name = "lastUpdated", nullable = true)
+	private String LastUpdatedDate;
+	
+	public User(CreateRequest createUserrq) {
+		this.siteID = createUserrq.getSiteID();
+		this.passID = createUserrq.getPassID();
+		this.Tag = createUserrq.getTag();
+		this.Name = createUserrq.getName();
+		this.LastName = createUserrq.getLastName();
+		this.SecondName = createUserrq.getSecondName();
+		this.SecondLastName = createUserrq.getSecondLastName();
+		this.Email = createUserrq.getEmail();
 	}
 	
-
+	public User(UpdateRequest updateUserrq) {
+		this.UserID = updateUserrq.getUserID();
+		this.siteID = updateUserrq.getSiteID();
+		this.passID = updateUserrq.getPassID();
+		this.Tag = updateUserrq.getTag();
+		this.Name = updateUserrq.getName();
+		this.LastName = updateUserrq.getLastName();
+		this.SecondName = updateUserrq.getSecondName();
+		this.SecondLastName = updateUserrq.getSecondLastName();
+		this.Email = updateUserrq.getEmail();
+	}
 }
