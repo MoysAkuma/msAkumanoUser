@@ -40,10 +40,41 @@ public class UserService {
 	 
 	 public User Update(UpdateRequest rq) {
 		 User usr = userRep.findById(rq.getUserID()).get();
-		 if(usr.getTag() != null && !usr.getTag().isEmpty()) {
-			 usr = new User(rq);
+		 if(usr != null) {
+			 
+			 if(rq.getName() != null && !rq.getName().isBlank())
+			 {
+				 usr.setName(rq.getName());
+			 }
+			 
+			 if(rq.getLastName() != null && !rq.getLastName().isBlank())
+			 {
+				 usr.setLastName(rq.getLastName());
+			 }
+			 
+			 if(rq.getSecondName() != null && !rq.getSecondName().isBlank())
+			 {
+				 usr.setSecondName(rq.getSecondName());
+			 }
+			 
+			 if(rq.getSecondLastName() != null && !rq.getSecondLastName().isBlank())
+			 {
+				 usr.setSecondLastName(rq.getSecondLastName());
+			 }
+			 
+			 if(rq.getEmail() != null && !rq.getEmail().isBlank())
+			 {
+				 usr.setEmail(rq.getEmail());
+			 }
+			 
+			 if(rq.getSiteID() != null)
+			 {
+				 usr.setSiteID(rq.getSiteID());
+			 }
+			 
+			 usr =  userRep.save(usr);
 		 }
-		 usr =  userRep.save(usr);
+		 
 		 return usr;
 	 }
 	 

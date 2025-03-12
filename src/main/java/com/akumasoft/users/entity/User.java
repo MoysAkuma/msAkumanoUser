@@ -79,5 +79,6 @@ public class User {
 		this.SecondName = updateUserrq.getSecondName();
 		this.SecondLastName = updateUserrq.getSecondLastName();
 		this.Email = updateUserrq.getEmail();
+		
 	}
 }
